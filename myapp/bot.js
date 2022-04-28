@@ -3,7 +3,7 @@ var mongoClient = require("mongodb").MongoClient;
 var request = require('sync-request');
 var http = require('http');
 var fs = require('fs');
-const vkapi = new (require('node-vkapi'))({ accessToken: 'e91b9f6b4e5a301d30b10e77832b94e5573fd268facac2f33024c0ff1c0a469e0a4bb5063c555d23fe84c' });
+const vkapi = new (require('node-vkapi'))({ accessToken: 'ACESS TOKEN' });
 const cheerio = require('cheerio');
 
 function random(min, max) {
@@ -109,7 +109,7 @@ return datetime;
 
 
 function getweather(){
-var res = request('GET', 'http://api.openweathermap.org/data/2.5/weather?q=Novosibirsk&units=metric&appid=11e0a65bc73555b20c4e4eeabc1ebeca');
+var res = request('GET', 'ACCESS TOKEN');
 var r = res.getBody().toString() ;
 r = JSON.parse(r);
 return r.main.temp;
