@@ -2,8 +2,8 @@
 - First of all, 
 - open Myapp
 - open Console 
-- - > npm start
-- - > node bot.js
+- > npm start
+- > node bot.js
 # WARNING 
 - This bot is needs rework
 - Require a newer version of VK API
