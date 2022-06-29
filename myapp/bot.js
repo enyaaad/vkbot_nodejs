@@ -1,9 +1,6 @@
-var phrases = [];
 var mongoClient = require("mongodb").MongoClient;
 var request = require('sync-request');
-var http = require('http');
-var fs = require('fs');
-const vkapi = new (require('node-vkapi'))({ accessToken: 'ACESS TOKEN' });
+const vkapi = new (require('node-vkapi'))({ accessToken: 'vk1.a.0qrhJo_iYZx4O2Nul3A0I4xJxECvsN8aV_k9w4Y-mLVDtFjPVdfD7n3UoZEFMQ5gEHCPkU9oNWJnhDRf1YJr5tR5yZOLT3TXAiACd7BnBRLkCkQR486tfCQHrNsIfy9fyi_V0hesCwYQlf5xOGe9fy9DDGkeuU6xKKdZ93TsOwr4VtOz2bMGQ6wa3TPW6wec' });
 const cheerio = require('cheerio');
 
 function random(min, max) {
@@ -13,17 +10,18 @@ function random(min, max) {
 }
 loop();
 function loop(){
-	vkapi.call('messages.getDialogs', {
+	vkapi.call('messages.getConversations', {
 	unread: '1',
-	count: 20
-	
-	
+	count: 20,
+	v: '5.131'
+
 })
-  .then(messages => answer(messages))
+	.then(messages => answer(messages))
   .catch(error => console.log(error));
 setTimeout(loop,5000);
 }
-function sendms(message,user_id,attachment) 			{
+
+function sendms(message,user_id,attachment){
 if (attachment === undefined){
 	attachment = "";
 }
@@ -32,12 +30,13 @@ console.log(attachment);
 			user_id: user_id,
 			/* message: brain(m.message.body) */
 			message:message,
-			attachment: attachment 
+			attachment: attachment,
+			v: '5.131',
+			random_id: 0
 			})
   .then(messages => console.log(messages.toString()))
   .catch(error => console.log(error));	
-	
-	
+
 }
 
 function uploaddoc(user_id){
@@ -83,11 +82,11 @@ for (var i = 0; i<10 ; i++){
 .catch(error => console.log(error));
 }
 
-function answer(messages) { 
+function answer(messages) {
 	if(messages.items[0]){
 		messages.items.forEach(function(m){
-			console.log(m.message);
-			brain(m.message.body,m.message.user_id);
+			console.log(m.last_message.text);
+			brain(m.last_message.text,m.last_message.peer_id);
 	
 });
 }
@@ -97,14 +96,13 @@ function answer(messages) {
 }
 
 function getTime(){
-var currentdate = new Date(); 
-var datetime = "На данный момент : " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-return datetime;	
+var currentdate = new Date();
+	return "На данный момент : " + currentdate.getDate() + "/"
+	+ (currentdate.getMonth() + 1) + "/"
+	+ currentdate.getFullYear() + " @ "
+	+ currentdate.getHours() + ":"
+	+ currentdate.getMinutes() + ":"
+	+ currentdate.getSeconds();
 }
 
 
@@ -138,17 +136,6 @@ return r;
 }
 
 
-function getprimer(){
-
-
-}
-
-
-function readfile(user){
-  fs.readFile('file.txt', function(err, data) {
-	  sendms(data.toString(),user)
-  });
-}
 
 function brain(msg,user){
   switch (msg.toLowerCase()) {
