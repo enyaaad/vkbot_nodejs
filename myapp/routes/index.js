@@ -4,7 +4,7 @@ var router = express.Router();
 
 
 const fs    = require('fs');
-const vkapi = new (require('node-vkapi'))({ accessToken: 'vk1.a.0qrhJo_iYZx4O2Nul3A0I4xJxECvsN8aV_k9w4Y-mLVDtFjPVdfD7n3UoZEFMQ5gEHCPkU9oNWJnhDRf1YJr5tR5yZOLT3TXAiACd7BnBRLkCkQR486tfCQHrNsIfy9fyi_V0hesCwYQlf5xOGe9fy9DDGkeuU6xKKdZ93TsOwr4VtOz2bMGQ6wa3TPW6wec' });
+const vkapi = new (require('node-vkapi'))({ accessToken: 'apikey' });
 	
 	
 /* GET home page. */
